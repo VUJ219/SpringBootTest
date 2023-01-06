@@ -1,13 +1,16 @@
 package com.vuj.practice.model.dto;
 
+import com.vuj.practice.model.User;
+
 import java.time.LocalDate;
 
 public class TodoDto {
     private Integer id;
+    private User owner;
     private String title;
     private LocalDate deadline;
     private String description;
-    private Boolean IsItDone;
+    private Boolean isItDone;
 
     public Integer getId() {
         return id;
@@ -25,8 +28,8 @@ public class TodoDto {
         return description;
     }
 
-    public Boolean getItDone() {
-        return IsItDone;
+    public Boolean getIsItDone() {
+        return isItDone;
     }
 
     public void setId(Integer id) {
@@ -45,7 +48,15 @@ public class TodoDto {
         this.description = description;
     }
 
-    public void setItDone(Boolean itDone) {
-        IsItDone = itDone;
+    public void setIsItDone(Boolean isItDone) {
+        this.isItDone = isItDone;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

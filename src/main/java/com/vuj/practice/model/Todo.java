@@ -1,19 +1,19 @@
 package com.vuj.practice.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 public class Todo {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @ManyToOne
+    private User owner;
     private String title;
     private LocalDate deadline;
     private String description;
-    private Boolean IsItDone;
+    private Boolean isItDone;
 
     public Integer getId() {
         return id;
@@ -31,8 +31,8 @@ public class Todo {
         return description;
     }
 
-    public Boolean getItDone() {
-        return IsItDone;
+    public Boolean getIsItDone() {
+        return isItDone;
     }
 
     public void setId(Integer id) {
@@ -51,7 +51,15 @@ public class Todo {
         this.description = description;
     }
 
-    public void setItDone(Boolean itDone) {
-        IsItDone = itDone;
+    public void setIsItDone(Boolean isItDone) {
+        this.isItDone = isItDone;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }
