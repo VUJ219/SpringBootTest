@@ -2,37 +2,47 @@ package com.vuj.practice.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.List;
 
 
-//INSERT INTO USERTABLE(username, emailAddress, Password)
-//VALUES('Janos10','janos@gmail.com','af34awresfdy'),
-//      ('_Bela_','bela@gmail.com','be14ak1r41y');
-@Entity(name = "USERTABLE")
+@Entity(name = "users")
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String Username;
-    private String EmailAddress;
-    private String Password;
+    private String username;
+    private String emailAddress;
+    private String password;
 
+    public User() {
+        id = 0;
+        username = "";
+        emailAddress = "";
+        password = "";
+    }
+
+    public User(String username, String emailAddress, String password) {
+        id = 0;
+        this.username = username;
+        this.emailAddress = emailAddress;
+        this.password = password;
+    }
 
     public Integer getId() {
         return id;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public String getEmailAddress() {
-        return EmailAddress;
+        return emailAddress;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setId(Integer id) {
@@ -40,14 +50,14 @@ public class User {
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public void setEmailAddress(String emailAddress) {
-        EmailAddress = emailAddress;
+        this.emailAddress = emailAddress;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 }
