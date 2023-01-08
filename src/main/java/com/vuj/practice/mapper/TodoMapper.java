@@ -9,7 +9,7 @@ public class TodoMapper {
         TodoDto todoDto = new TodoDto();
 
         todoDto.setId(todo.getId());
-        todoDto.setOwner(todo.getOwner());
+        todoDto.setOwnerId(todo.getOwner().getId());
         todoDto.setTitle(todo.getTitle());
         todoDto.setDeadline(todo.getDeadline());
         todoDto.setDescription(todo.getDescription());

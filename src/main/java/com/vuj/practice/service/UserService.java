@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
     private UserRepository userRepository;
-    private TodoRepository todoRepository;
 
     public UserService(final UserRepository userRepository) {
         this.userRepository = userRepository;

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class TodoDto {
     private Integer id;
-    private User owner;
+    private Integer ownerId;
     private String title;
     private LocalDate deadline;
     private String description;
@@ -52,11 +52,11 @@ public class TodoDto {
         this.isItDone = isItDone;
     }
 
-    public User getOwner() {
-        return owner;
+    public Integer getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setOwnerId(Integer ownerId) {
+        this.ownerId = ownerId;
     }
 }
