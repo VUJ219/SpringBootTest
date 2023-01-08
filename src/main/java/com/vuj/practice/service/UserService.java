@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
     private UserRepository userRepository;
-    BCryptPasswordEncoder passwordEncoder;
+    private BCryptPasswordEncoder passwordEncoder;
 
     public UserService(final UserRepository userRepository) {
         this.userRepository = userRepository;
