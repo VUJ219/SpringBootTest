@@ -1,9 +1,6 @@
 package com.vuj.practice.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity(name = "users")
@@ -14,12 +11,15 @@ public class User {
     private String username;
     private String emailAddress;
     private String password;
+    @Lob
+    byte[] profilePicture;
 
     public User() {
         id = 0;
         username = "";
         emailAddress = "";
         password = "";
+        profilePicture = null;
     }
 
     public User(String username, String emailAddress, String password) {
@@ -27,6 +27,7 @@ public class User {
         this.username = username;
         this.emailAddress = emailAddress;
         this.password = password;
+        profilePicture = null;
     }
 
     public Integer getId() {
@@ -59,5 +60,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public byte[] getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }

@@ -2,8 +2,12 @@ package com.vuj.practice.controller;
 
 import com.vuj.practice.model.dto.UserDto;
 import com.vuj.practice.service.UserService;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -26,6 +30,11 @@ public class UsersController {
         return userService.getUserById(id);
     }
 
+    @GetMapping(value = "{id}/profilePicture", produces = MediaType.IMAGE_JPEG_VALUE)
+    Resource downloadImage(@PathVariable Integer id) {
+        return new ByteArrayResource(userService.getProfilePictureOfUser(id));
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public UserDto createUser(@RequestBody final UserDto userDto) {
@@ -36,6 +45,12 @@ public class UsersController {
     @ResponseStatus(HttpStatus.OK)
     public UserDto updateUser(@PathVariable final Integer id, @RequestBody final UserDto userDto) {
         return userService.updateUser(id, userDto);
+    }
+
+    @PutMapping(value= "/{id}/profilePicture")
+    @ResponseStatus(HttpStatus.OK)
+    public UserDto UploadProfilePicture(@PathVariable final Integer id, @RequestParam MultipartFile multipartImage) throws Exception {
+        return userService.addProfilePictureToUser(id, multipartImage);
     }
 
     @DeleteMapping(value= "/{id}")
