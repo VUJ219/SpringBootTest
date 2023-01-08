@@ -6,6 +6,7 @@ import com.vuj.practice.model.dto.UserDto;
 import com.vuj.practice.repository.TodoRepository;
 import com.vuj.practice.repository.UserRepository;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +16,11 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
     private UserRepository userRepository;
+    BCryptPasswordEncoder passwordEncoder;
 
     public UserService(final UserRepository userRepository) {
         this.userRepository = userRepository;
+        passwordEncoder = new BCryptPasswordEncoder(12);
     }
 
     public List<UserDto> getUsers() {
@@ -32,7 +35,7 @@ public class UserService {
         final User user = userRepository.findById(id).orElseThrow();
         user.setUsername(userDto.getUsername());
         user.setEmailAddress(userDto.getEmailAddress());
-        user.setPassword(userDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
         return UserMapper.map(userRepository.save(user));
     }
@@ -41,7 +44,7 @@ public class UserService {
         User user = new User();
         user.setUsername(userDto.getUsername());
         user.setEmailAddress(userDto.getEmailAddress());
-        user.setPassword(userDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
         return UserMapper.map(userRepository.save(user));
     }
