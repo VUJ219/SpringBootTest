@@ -1,6 +1,6 @@
 # SpringBootTest
 
-After opening the project in and IDE (in my case I used IntelliJ) it should be runnable.
+After opening the project in an IDE (in my case I used IntelliJ) it should be runnable.
 
 While running we can check the h2 console at "http://localhost:8080/h2-console/".
 If we set the JDBC URL to "jdbc:h2:mem:todoDB",
