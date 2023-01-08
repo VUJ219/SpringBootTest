@@ -5,7 +5,9 @@ import com.vuj.practice.model.Todo;
 import com.vuj.practice.model.dto.TodoDto;
 import com.vuj.practice.repository.TodoRepository;
 import com.vuj.practice.repository.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -40,12 +42,16 @@ public class TodoService {
     }
 
     public TodoDto getTodoById(final int id) {
-        return TodoMapper.map(todoRepository.findById(id).orElseThrow());
+        return TodoMapper.map(todoRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
     }
 
     public TodoDto updateTodo(int id, TodoDto todoDto) {
         final Todo todo = todoRepository.findById(id).orElseThrow();
-        todo.setOwner(userRepository.findById(todoDto.getOwnerId()).orElseThrow());
+        todo.setOwner(userRepository.findById(
+                todoDto.getOwnerId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND))
+        );
         todo.setTitle(todoDto.getTitle());
         todo.setDescription(todoDto.getDescription());
         todo.setDeadline(todoDto.getDeadline());
@@ -56,7 +62,8 @@ public class TodoService {
 
     public TodoDto createTodo(TodoDto todoDto) {
         Todo todo = new Todo();
-        todo.setOwner(userRepository.findById(todoDto.getOwnerId()).orElseThrow());
+        todo.setOwner(userRepository.findById(todoDto.getOwnerId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
         todo.setTitle(todoDto.getTitle());
         todo.setDescription(todoDto.getDescription());
         todo.setDeadline(todoDto.getDeadline());
